@@ -14,7 +14,7 @@ const Dashboard = () => {
   const handleNewData = (datas) => {
     console.log("datas:", datas);
     axios
-      .get("http://localhost:3001/datas/1")
+      .get("https://finserv-static-api.herokuapp.com/datas/1")
       .then(({ data }) => {
         const payload = [...data.mydata, datas];
         console.log("payload:", payload);
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const saveData = (payload) => {
     axios
-      .put("http://localhost:3001/datas/1", {
+      .put("https://finserv-static-api.herokuapp.com/datas/1", {
         mydata: payload,
       })
       .then((resp) => {
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
   const loadData = () => {
     axios
-      .get("http://localhost:3001/datas/1")
+      .get("https://finserv-static-api.herokuapp.com/datas/1")
       .then(({ data }) => {
         console.log('data:', data.mydata)
         const meanVal = mean(data.mydata);
