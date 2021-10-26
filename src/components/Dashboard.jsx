@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import StaticsCard from "./StaticsCard/StaticsCard";
 import InputForm from "./InputForm/InputForm";
 import { mean } from "../helperFunction/mean";
@@ -9,34 +10,42 @@ import { mode } from "../helperFunction/mode";
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [statics, setStatics] = useState([]);
-  const [dataSet, setDataSet] = useState([]);
-  const handleNewData = (data) => {
-    // console.log("data:", data);
-    // console.log("dataSet:", dataSet);
-    const payload = [...dataSet, data];
-    // console.log("payload:", payload);
-    saveData(payload);
-  };
-  const saveData = (payload) => {
-    console.log("payload:", payload);
+  const handleNewData = (datas) => {
+    console.log("datas:", datas);
     axios
-      .put("http://localhost:3001/data", { data: payload })
-      .then((resp) => {
-        console.log("resp:", resp);
+      .get("http://localhost:3001/datas/1")
+      .then(({ data }) => {
+        const payload = [...data.mydata, datas];
+        console.log("payload:", payload);
+        saveData(payload);
       })
       .catch((err) => {
         console.log("err:", err);
       });
   };
+
+  const saveData = (payload) => {
+    axios
+      .put("http://localhost:3001/datas/1", {
+        mydata: payload,
+      })
+      .then((resp) => {
+       loadData()
+      })
+      .catch((err) => {
+        console.log("err in save data:", err);
+      });
+  };
+
   const loadData = () => {
     axios
-      .get("http://localhost:3001/data")
+      .get("http://localhost:3001/datas/1")
       .then(({ data }) => {
-        setDataSet(data);
-        const meanVal = mean(data);
-        const medianVal = median(data);
-        const modeVal = mode(data);
-        const deviationVal = deviation(data);
+        console.log('data:', data.mydata)
+        const meanVal = mean(data.mydata);
+        const medianVal = median(data.mydata);
+        const modeVal = mode(data.mydata);
+        const deviationVal = deviation(data.mydata);
 
         setStatics({ meanVal, medianVal, modeVal, deviationVal });
         setLoading(false);
@@ -49,7 +58,7 @@ const Dashboard = () => {
   useEffect(() => {
     loadData();
   }, []);
-  //   console.log(statics);
+
   return loading ? (
     "Loading"
   ) : (
