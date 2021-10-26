@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const StaticsCard = () => {
-    return (
-        <div>
-            statics
-        </div>
-    )
-}
+  return <div>statics</div>;
+};
 
-export default StaticsCard
+export default StaticsCard;
