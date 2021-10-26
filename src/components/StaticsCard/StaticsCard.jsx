@@ -1,37 +1,37 @@
 import React from "react";
-import { Wrapper } from "./StaticsCard.style";
+import { Wrapper,Title,Table,TD,TH } from "./StaticsCard.style";
 const StaticsCard = ({ statics }) => {
   //   console.log("statics:", statics);
   return (
     <Wrapper>
 
-      <table>
-      <caption>Statics</caption>
+      <Title>Statics</Title>
+      <Table>
         <thead>
           <tr>
-            <th>Calculation</th>
-            <th>Value</th>
+            <TH>Calculation</TH>
+            <TH>Value</TH>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Mean</td>
-            <td>{statics.meanVal}</td>
+            <TD>Mean</TD>
+            <TD>{statics.meanVal}</TD>
           </tr>
           <tr>
-            <td>Median</td>
-            <td>{statics.medianVal}</td>
+            <TD>Median</TD>
+            <TD>{statics.medianVal}</TD>
           </tr>
           <tr>
-            <td>StdDev</td>
-            <td>{statics.deviationVal}</td>
+            <TD>StdDev</TD>
+            <TD>{statics.deviationVal}</TD>
           </tr>
           <tr>
-            <td>Mode</td>
-            <td>{statics.modeVal}</td>
+            <TD>Mode</TD>
+            <TD>{statics.modeVal}</TD>
           </tr>
         </tbody>
-      </table>
+      </Table>
       
     </Wrapper>
   );

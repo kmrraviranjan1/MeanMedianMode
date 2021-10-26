@@ -7,6 +7,7 @@ import { mean } from "../helperFunction/mean";
 import { median } from "../helperFunction/median";
 import { deviation } from "../helperFunction/deviation";
 import { mode } from "../helperFunction/mode";
+import { Wrapper } from "./Dashboard.style";
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [statics, setStatics] = useState([]);
@@ -62,10 +63,10 @@ const Dashboard = () => {
   return loading ? (
     "Loading"
   ) : (
-    <div>
+    <Wrapper>
       <StaticsCard statics={statics} />
       <InputForm handleNewData={handleNewData} />
-    </div>
+    </Wrapper>
   );
 };
 
