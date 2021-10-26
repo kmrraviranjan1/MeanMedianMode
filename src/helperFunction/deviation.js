@@ -7,7 +7,7 @@ export const deviation = (data) => {
   const value2 = mean(variance);
 
   const standardDeviation = Math.sqrt(value2);
-  console.log("standardDeviation:", standardDeviation);
+//   console.log("standardDeviation:", standardDeviation);
   return standardDeviation;
 };
 
