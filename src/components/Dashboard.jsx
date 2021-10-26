@@ -8,17 +8,37 @@ import { deviation } from "../helperFunction/deviation";
 import { mode } from "../helperFunction/mode";
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
+  const [statics, setStatics] = useState([]);
   const [dataSet, setDataSet] = useState([]);
+  const handleNewData = (data) => {
+    // console.log("data:", data);
+    // console.log("dataSet:", dataSet);
+    const payload = [...dataSet, data];
+    // console.log("payload:", payload);
+    saveData(payload);
+  };
+  const saveData = (payload) => {
+    console.log("payload:", payload);
+    axios
+      .put("http://localhost:3001/data", { data: payload })
+      .then((resp) => {
+        console.log("resp:", resp);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  };
   const loadData = () => {
     axios
       .get("http://localhost:3001/data")
       .then(({ data }) => {
+        setDataSet(data);
         const meanVal = mean(data);
         const medianVal = median(data);
         const modeVal = mode(data);
         const deviationVal = deviation(data);
 
-        setDataSet({ meanVal, medianVal, modeVal, deviationVal });
+        setStatics({ meanVal, medianVal, modeVal, deviationVal });
         setLoading(false);
       })
       .catch((err) => {
@@ -29,13 +49,13 @@ const Dashboard = () => {
   useEffect(() => {
     loadData();
   }, []);
-//   console.log(dataSet);
+  //   console.log(statics);
   return loading ? (
     "Loading"
   ) : (
     <div>
-      <StaticsCard dataSet={dataSet}/>
-      <InputForm />
+      <StaticsCard statics={statics} />
+      <InputForm handleNewData={handleNewData} />
     </div>
   );
 };

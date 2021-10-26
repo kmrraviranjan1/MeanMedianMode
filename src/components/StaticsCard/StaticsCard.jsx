@@ -1,14 +1,14 @@
 import React from "react";
 
-const StaticsCard = ({ dataSet }) => {
-//   console.log("dataSet:", dataSet);
+const StaticsCard = ({ statics }) => {
+//   console.log("statics:", statics);
   return (
     <div>
       statics
-      <div>{dataSet.meanVal}</div>
-      <div>{dataSet.medianVal}</div>
-      <div>{dataSet.modeVal}</div>
-      <div>{dataSet.deviationVal}</div>
+      <div>{statics.meanVal}</div>
+      <div>{statics.medianVal}</div>
+      <div>{statics.modeVal}</div>
+      <div>{statics.deviationVal}</div>
     </div>
   );
 };
